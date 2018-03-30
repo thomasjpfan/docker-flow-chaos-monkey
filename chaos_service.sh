@@ -4,6 +4,7 @@ export chaos_sleep=${chaos_sleep:-10}
 export chaos_start=${chaos_start:-10}
 export chaos_service=${chaos_service:-random}
 export chaos_replicas=${chaos_replicas:-1}
+echo "Starting ${chaos_service}"
 docker service create \
   --name ${chaos_service} \
   -e chaos_sleep=${chaos_sleep} \
@@ -17,4 +18,5 @@ docker service create \
   --health-retries 2 \
   --health-start-period ${chaos_start}s \
   --health-timeout 2s \
+  --detach \
   lelandsindt/docker-flow-chaos-monkey
