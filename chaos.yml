@@ -17,7 +17,7 @@ services:
       interval: 1s
       timeout: 1s
       retries: 1
-      start_period: ${chaos_start}s
+      start_period: ${chaos_start:-30}s
 
 networks:
   proxy:
