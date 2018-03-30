@@ -1,0 +1,31 @@
+version: "3.5"
+
+services:
+  chaos:
+    image: lelandsindt/docker-flow-chaos-monkey 
+    networks:
+      - proxy
+    deploy:
+      labels:
+        com.df.notify: "true"
+        com.df.servicePath: "/${chaos_stack}"
+        com.df.port: 80
+        com.df.aclName: "0001-${chaos_stack}"
+    logging: *default-logging
+    healthcheck:
+      test: curl localhost || exit 1
+      interval: 1s
+      timeout: 1s
+      retries: 1
+      start_period: ${chaos_start}s
+
+networks:
+  proxy:
+    external: true
+
+x-logging:
+  &default-logging
+  driver: json-file
+  options:
+    max-size: 1m
+    max-file: 32
