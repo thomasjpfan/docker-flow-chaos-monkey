@@ -2,17 +2,19 @@
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
 
+monkeys=10
+
 function ctrl_c() {
   echo "** Trapped CTRL-C"
-  for i in {1..5}; do
+  for i in $(seq ${monkeys}); do
     docker service ls |grep " monkey_${i}  " && docker service rm monkey_${i}
   done
   exit 0
 }
 
 while true; do
-  for i in {1..5}; do
-    case $(( ( RANDOM % 3 )  + 1 )) in
+  for i in $(seq ${monkeys}); do
+    case $(( ( RANDOM % 2 )  + 1 )) in
     1)
       echo "*** start monkey_${i}"
       export chaos_sleep=$(( ( RANDOM % 10 )  + 1 ))
