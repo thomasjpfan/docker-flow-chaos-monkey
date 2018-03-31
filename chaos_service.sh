@@ -14,8 +14,8 @@ docker service create \
   --label com.df.port=80 \
   --replicas ${chaos_replicas} \
   --health-cmd "curl localhost || exit 1" \
-  --health-interval 1s \
-  --health-retries 2 \
+  --health-interval 3s \
+  --health-retries 3 \
   --health-start-period ${chaos_start}s \
   --health-timeout 2s \
   --detach \
