@@ -4,7 +4,7 @@ export chaos_sleep=${chaos_sleep:-10}
 export chaos_start=${chaos_start:-10}
 export chaos_service=${chaos_service:-random}
 export chaos_replicas=${chaos_replicas:-1}
-echo "Starting ${chaos_service}"
+echo "Starting ${chaos_service}. Start Delay: ${chaos_sleep}. Health Delay: ${chaos_start}. Replicas: ${chaos_replicas}"
 docker service create \
   --name ${chaos_service} \
   -e chaos_sleep=${chaos_sleep} \
