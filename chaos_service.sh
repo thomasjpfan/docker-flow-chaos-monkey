@@ -12,6 +12,7 @@ docker service create \
   --label com.df.notify=true \
   --label com.df.servicePath=/${chaos_service} \
   --label com.df.port=80 \
+  --label com.df.reqPathSearchReplace='/'${chaos_service}'/,//' \
   --replicas ${chaos_replicas} \
   --health-cmd "curl localhost || exit 1" \
   --health-interval 3s \
