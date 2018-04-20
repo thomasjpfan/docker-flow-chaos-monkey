@@ -3,7 +3,7 @@ version: "3.5"
 services:
 
   proxy:
-    image: vfarcic/docker-flow-proxy
+    image: dockerflow/docker-flow-proxy
     ports:
       - 80:80
       - 443:443
@@ -13,11 +13,11 @@ services:
       - LISTENER_ADDRESS=swarm-listener
       - MODE=swarm
     deploy:
-      replicas: 2
+      replicas: 1
     logging: *default-logging
 
   swarm-listener:
-    image: vfarcic/docker-flow-swarm-listener
+    image: dockerflow/docker-flow-swarm-listener
     networks:
       - proxy
     volumes:
@@ -28,7 +28,7 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
-  
+
 networks:
   proxy:
     external: true
